@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  final List<String> entries = <String>['A', 'B', 'C', 'A', 'B', 'C', 'B', 'C', 'A', 'B', 'C', 'B', 'C', 'A', 'B', 'C', 'B', 'C', 'A', 'B', 'C', 'B', 'C', 'A', 'B', 'C'];
+  final List<String> entries = <String>['Ваня', 'Денис', 'Давид', 'Велирчик', 'Шарий'];
   final List<int> colorCodes = <int>[600, 500, 100, 500, 100, 500, 100, 500, 100, 500, 100, 500, 100, 500, 100, 500, 100, 500, 100, 500, 100, 500, 100, 500, 100];
 
   @override
@@ -73,24 +74,25 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: CustomScrollView(
-        slivers: [
-          // SliverAppBar(...),
-          SliverList(delegate: SliverChildListDelegate(
-              List.generate(entries.length, (idx) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: Card(
-                    child: ListTile(
-                      leading: Icon(Icons.add),
-                      title: Text(entries[idx]),
-                      onTap: null,
-                    ),
-                  ),
-                );
-              })
-          ))
-        ],
+      body: GridView.count(
+        // Create a grid with 2 columns. If you change the scrollDirection to
+        // horizontal, this produces 2 rows.
+        crossAxisCount: 2,
+        // Generate 100 widgets that display their index in the List.
+        children: List.generate(entries.length, (index) {
+
+          return Center(
+            child: Card(
+              color: Colors.green,
+
+              child: ListTile(
+                leading: Icon(Icons.add),
+                title: Text(entries[index]),
+                onTap: null,
+              ),
+            ),
+          );
+        }),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
